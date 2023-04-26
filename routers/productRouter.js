@@ -3,51 +3,117 @@ const router = express.Router();
 const models = require("../models");
 const handleResponse = require("../common/response");
 const util = require("../util");
-const createWebsite = require('./websiteRouter');
-const createCategory = require('./categoryRouter');
+const createWebsite = require("./websiteRouter").createWebsite;
+const createCategory = require("./categoryRouter").createCategory;
 
 // @ POST api/product
 // @Desc: Create product
-// @access: Public 
+// @access: Public
+router.post("/", async (req, res) => {
+  let { Url, Type, Name, Price, OriginalPrice, NameCategory, Imgs, Desc } =
+    req.body;
 
-router.post("/", async (res, req) => {
-    const { Url, Type, Name, Price, OriginalPrice, NameCategory, Imgs, Desc } = res.body;
+  if (!Url) return handleResponse(res, 400, "Url is required for Product!");
 
-    if (!Url)
-        return handleResponse(res, 400, "Url is required for Product!");
+  if (!Price) return handleResponse(res, 400, "Price is required for Product!");
 
-    if (!Price)
-        return handleResponse(res, 400, "Price is required for Product!");
+  if (!NameCategory)
+    return handleResponse(res, 400, "Category is required for Product!");
 
-    if (!NameCategory)
-        return handleResponse(res, 400, "Category is required for Product!");
+  try {
+    let product = await models.Product.findOne({ Url });
+    if (product)
+      return handleResponse(res, 400, "Product is existed!", product);
+    let domainLink = util.getDomain(Url);
+    console.log(domainLink);
+    let WebsiteID = await models.Website.findOne(
+      { Domain: domainLink },
+      { _id: 1 }
+    );
+    if (!WebsiteID) WebsiteID = await createWebsite(domainLink)._id;
 
+    let Category = await models.Category.findOne({
+      Name: NameCategory,
+    });
+    if (!Category) Category = await createCategory(NameCategory, Type);
+
+    let CategoryID = Category._id;
+    console.log(WebsiteID);
+    console.log(CategoryID);
+    let newProduct = new models.Product({
+      Url,
+      Name,
+      Price,
+      OriginalPrice,
+      WebsiteID,
+      CategoryID,
+    });
+    console.log(newProduct);
+    newProduct = await newProduct.save();
     try {
-        let domainLink = util.getDomain(URL);
-        let websiteID = models.Product.findOne({ domainLink }, { _id: 1 });
-        if (!websiteID) websiteID = await createWebsite(domainLink)._id;
+      // update Product For Category
+      // add to list ProductID
+      Category.ProductIDs.push(newProduct._id);
+      // update price
+      if (Price < Category.Price) Category.Price = Price;
+      // update list imgs
+      Imgs = Imgs.replace(/'/g, '"');
+      //   console.log(Imgs);
+      Imgs = JSON.parse(Imgs);
+      //   console.log(Imgs);
+      if (Imgs) {
+        Imgs.forEach((value) => {
+          if (Category.Imgs.length == process.env.MAX_IMGS) return;
+          Category.Imgs.push(value);
+        });
+      }
+      // update desc
+      if (Desc) {
+        Category.Desc = Desc;
+      }
 
+      const updatedCategory = await models.Category.findOneAndUpdate(
+        { _id: Category._id },
+        Category,
+        {
+          new: true,
+        }
+      );
 
-        let CategoryID = await models.Category.findOne({ Name: NameCategory }, { _id: 1 });
-        if (!CategoryID) CategoryID = await createCategory(Name, Type)._id;
-
-        let newProduct = {
-            Url,
-            Name,
-            Price,
-            OriginalPrice,
-            websiteID,
-            CategoryID,
-        };
-
-        newProduct = await newProduct.save();
-
-        // update Product For Category
-
-
+      return handleResponse(
+        res,
+        201,
+        "Create Product Successfully",
+        newProduct
+      );
     } catch (error) {
-
+      console.log(error);
+      await models.Product.findOneAndDelete({ Url });
     }
+  } catch (error) {
+    console.log(error);
+    return handleResponse(res, 500);
+  }
+});
+
+// @ GET api/product
+// @Desc: Get ?quantity Product
+// @access: Public
+router.get("/", async (req, res) => {
+  const numProduct = req.query.quantity || process.env.DEFAULT_QUANTITY;
+  console.log(`Number Product = ${numProduct}`);
+  try {
+    let JsonDB = await util.exportDBtoJSON(
+      models.Product,
+      { Price: 1 },
+      numProduct
+    );
+
+    res.send(JsonDB);
+  } catch (error) {
+    console.log(error);
+    return handleResponse(res, 500);
+  }
 });
 
 module.exports = router;

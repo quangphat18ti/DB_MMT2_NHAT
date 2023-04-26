@@ -1,5 +1,5 @@
-const website = require("./websiteRouter");
-const category = require("./categoryRouter");
+const website = require("./websiteRouter").router;
+const category = require("./categoryRouter").router;
 const product = require("./productRouter");
 
 module.exports = { website, category, product };
