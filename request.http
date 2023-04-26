@@ -1,0 +1,35 @@
+POST http://localhost:5000/api/website
+Content-Type: application/json
+
+{
+    "Domain": "https://tiki.vn/"
+}
+
+###
+POST http://localhost:5000/api/website
+Content-Type: application/json
+
+{
+    "Domain": "fptshop.com.vn",
+    "Icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0GEt9Uh2dAhwcz8tsqDZXnPmtg2BhHbiA1vcB-bn85w&s"
+}
+
+###
+POST http://localhost:5000/api/website
+Content-Type: application/json
+
+{
+    "Domain": "thegioididong.com"
+}
+
+
+###
+POST http://localhost:5000/api/website
+Content-Type: application/json
+
+{
+    "Domain": "https://websosanh.vn/"
+}
+
+###
+GET http://localhost:5000/api/category/Asus-TUF-Gaming-FX506LHB-HN188W
