@@ -47,7 +47,7 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
         {
             "Name" : "Asus TUF Gaming FX506LHB HN188W",
             "Type": : "Laptop",
-            "Desc" : "abc"
+            "Desc" : "CPU: asdf\nMàn hình: ...\n"
         }
 
 ### Thông số
@@ -73,7 +73,7 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
             "Price": 15990000,
             "OriginalPrice": 2099000,
             "NameCategory": "Laptop Asus TUF Gaming FX506LHB HN188W",
-            "Imgs": "['https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/ASUS-TUF-Gaming-F15-2021-black-fpt-3.jpg','https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/ASUS-TUF-Gaming-F15-2021-black-fpt-1.jpg']",
+            "Imgs": ["https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/ASUS-TUF-Gaming-F15-2021-black-fpt-3.jpg","https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/ASUS-TUF-Gaming-F15-2021-black-fpt-1.jpg"],
             "Desc" : "abc"
 
 }
