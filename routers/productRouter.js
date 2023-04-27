@@ -68,7 +68,7 @@ router.post("/", async (req, res) => {
         });
       }
       // update desc
-      if (Desc) {
+      if (!Category.Desc && Desc) {
         Category.Desc = Desc;
       }
 
