@@ -12,6 +12,7 @@ const createCategory = require("./categoryRouter").createCategory;
 router.post("/", async (req, res) => {
   let { Url, Type, Name, Price, OriginalPrice, NameCategory, Imgs, Desc } =
     req.body;
+  console.log("imgs = ", Imgs);
 
   if (!Url) return handleResponse(res, 400, "Url is required for Product!");
 
@@ -25,7 +26,6 @@ router.post("/", async (req, res) => {
     if (product)
       return handleResponse(res, 400, "Product is existed!", product);
     let domainLink = util.getDomain(Url);
-    console.log(domainLink);
     let WebsiteID = await models.Website.findOne(
       { Domain: domainLink },
       { _id: 1 }
@@ -38,8 +38,6 @@ router.post("/", async (req, res) => {
     if (!Category) Category = await createCategory(NameCategory, Type);
 
     let CategoryID = Category._id;
-    console.log(WebsiteID);
-    console.log(CategoryID);
     let newProduct = new models.Product({
       Url,
       Name,
@@ -57,10 +55,7 @@ router.post("/", async (req, res) => {
       // update price
       if (Price < Category.Price) Category.Price = Price;
       // update list imgs
-      Imgs = Imgs.replace(/'/g, '"');
-      //   console.log(Imgs);
-      Imgs = JSON.parse(Imgs);
-      //   console.log(Imgs);
+      console.log(Imgs);
       if (Imgs) {
         Imgs.forEach((value) => {
           if (Category.Imgs.length == process.env.MAX_IMGS) return;
