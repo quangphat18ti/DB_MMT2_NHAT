@@ -46,7 +46,7 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
 
         {
             "Name" : "Asus TUF Gaming FX506LHB HN188W",
-            "Type": "Laptop",
+            "Type": : "Laptop",
             "Desc" : "abc"
         }
 
@@ -116,3 +116,23 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
     5. OriginalPrice: Number
     6. WebsiteID --> Không cần truyền mà cần tạo Website trước
     7. CategoryID --> Không cần truyền "nên" tạo Category trước. Nếu không có thì nó sẽ tự tạo.
+
+## Một số phương thức thêm
+
+### DELETE
+
+#### DELETE WEBSITE
+
+    DELETE  https://mmt-main-dbserver.vercel.app/api/website?domain=https://websosanh.vn
+
+Cấu trúc:
+
+- API Link + "?" + domain="linkWebsite"
+
+#### DELETE CATEGORY
+
+    DELETE https://mmt-main-dbserver.vercel.app/api/category/Laptop Asus-TUF-Gaming-FX506LHB-HN188W
+
+Cấu trúc:
+
+- API Link + "/" + CategoryName
