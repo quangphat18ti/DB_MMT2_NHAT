@@ -46,7 +46,7 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
 
         {
             "Name" : "Asus TUF Gaming FX506LHB HN188W",
-            "Type": : "Laptop",
+            "Type": "Laptop",
             "Desc" : "abc"
         }
 
