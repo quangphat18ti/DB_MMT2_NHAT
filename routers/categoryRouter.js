@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
 // @Desc: Create category without product
 // @access: Public
 router.post("/", async (req, res) => {
-  let { Name, Type } = req.body;
+  let { Name, Type, Desc } = req.body;
   if (!Name) return handleResponse(res, 400, "Name is required!");
   Type = Type ? Type : util.getTypeOfProduct(Name);
   Type = Type ? Type : "Laptop";
@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
     if (Category)
       return handleResponse(res, 400, "Category is existed!", Category);
 
-    let newCategory = await createCategory(Name, Type);
+    let newCategory = await createCategory(Name, Type, Desc);
     if (newCategory == null) {
       return handleResponse(res, 500);
     }
@@ -115,11 +115,12 @@ router.delete("/:Name", async (req, res) => {
   }
 });
 
-const createCategory = async (Name, Type) => {
+const createCategory = async (Name, Type, Desc) => {
   try {
     let newCategory = new models.Category({
       Type,
       Name,
+      Desc
     });
 
     newCategory = await newCategory.save();
