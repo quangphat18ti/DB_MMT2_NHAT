@@ -45,7 +45,7 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
         Content-Type: application/json
 
         {
-            "Name" : "Asus TUF Gaming FX506LHB HN188W",
+            "Name" : "Asus TUF Gaming FX506LHB HN188W - Intel Core I5 10300H | 8GB | .....",
             "Type": : "Laptop",
             "Desc": "Màn hình: 15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz, Anti-glare LED-backlit\nCPU: Intel, Core i5, 10300H\nRAM: 8 GB (1 thanh 8 GB), DDR4, 2933 MHz"
         }
