@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 });
 
 // @ POST api/website
-// @Desc: Create Website
+// @Desc: Create and Update Website
 // @access: Public
 router.post("/", async (req, res) => {
   let { Domain, Icon } = req.body;
@@ -42,17 +42,14 @@ router.post("/", async (req, res) => {
     );
 });
 
-// @ DELETE api/website
+// @ DELETE api/website/id
 // @Desc: DELETE Website by Domain
 // @access: Public
-router.delete("/", async (req, res) => {
-  let Domain = req.query.domain;
-  if (!Domain) return handleReponse(res, 400, "Domain is required!");
-  Domain = util.getDomain(Domain);
-  console.log(Domain);
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
 
   try {
-    let deleteWebsite = await models.Website.findOneAndDelete({ Domain });
+    let deleteWebsite = await models.Website.findOneAndDelete({ _id: id });
     if (!deleteWebsite)
       return handleResponse(res, 400, "Website is not existed!");
     else
@@ -67,6 +64,7 @@ router.delete("/", async (req, res) => {
     return handleResponse(res, 500);
   }
 });
+
 const createWebsite = async (Domain, Icon = null) => {
   if (!Domain) return null;
   Domain = util.getURLFromDomain(Domain);

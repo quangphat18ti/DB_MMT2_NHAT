@@ -4,7 +4,7 @@ const axios = require('axios');
 
 const getHTML = async (url) => {
     try {
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch();
         const page = await browser.newPage();
         page.setDefaultTimeout(0);
         await page.goto(url);

@@ -24,4 +24,4 @@ WebisteSchema.post("save", function () {
   return this;
 });
 
-module.exports = mongoose.model("Webiste", WebisteSchema);
+module.exports = mongoose.model("Website", WebisteSchema);

@@ -18,6 +18,11 @@ const ProductSchema = new Schema({
     OriginalPrice: {
         type: Number
     },
+    Imgs: [
+        {
+            type: String,
+        },
+    ],
     WebsiteID: {
         type: Schema.Types.ObjectId,
         ref: "Website",

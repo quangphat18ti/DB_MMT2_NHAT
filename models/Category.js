@@ -13,21 +13,6 @@ const CategorySchema = new Schema({
     require: true,
     unique: true,
   },
-  Price: {
-    type: Number,
-    default: 100000000,
-  },
-  Imgs: [
-    {
-      type: String,
-    },
-  ],
-  ProductIDs: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Product",
-    },
-  ],
   Desc: {
     type: String,
     default: "",
