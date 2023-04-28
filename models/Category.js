@@ -13,6 +13,13 @@ const CategorySchema = new Schema({
     require: true,
     unique: true,
   },
+  Price: {
+    type: Number,
+    default: 1000000000
+  },
+  Imgs: [{
+    type: String
+  }],
   Desc: {
     type: String,
     default: "",

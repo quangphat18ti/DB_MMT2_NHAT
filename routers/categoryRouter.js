@@ -27,19 +27,22 @@ router.get("/", async (req, res) => {
 // @Desc: Create category without product
 // @access: Public
 router.post("/", async (req, res) => {
-	let { Name, Type, Desc } = req.body;
+	let { Name, Type, Desc, Price, Imgs } = req.body;
+
 	if (!Name) return handleResponse(res, 400, "Name is required!");
+
 	Type = Type ? Type : util.getTypeOfProduct(Name);
 	Type = Type ? Type : "Laptop";
 	const Regex = new RegExp(/${Type}/i);
 	if (Name.search(Regex) == -1) Name = `${Type} ${Name}`;
 
 	try {
-		let Category = await models.Category.findOne({ Name });
-		if (Category)
-			return handleResponse(res, 400, "Category is existed!", Category);
+		let Category = await models.Category.findOneAndDelete({ Name });
 
-		let newCategory = await createCategory(Name, Type, Desc);
+		if (Category)
+			console.log("Delete Category: ", Category);
+
+		let newCategory = await createCategory(Name, Type, Desc, Price, Imgs);
 
 		if (!newCategory)
 			return handleResponse(res, 500);
@@ -51,6 +54,7 @@ router.post("/", async (req, res) => {
 			newCategory
 		);
 	} catch (error) {
+		console.log(error);
 		return handleResponse(res, 500);
 	}
 });
@@ -94,12 +98,14 @@ router.delete("/:id", async (req, res) => {
 	}
 });
 
-const createCategory = async (Name, Type, Desc) => {
+const createCategory = async (Name, Type, Desc, Price, Imgs) => {
 	try {
 		let newCategory = new models.Category({
 			Type,
 			Name,
-			Desc
+			Desc,
+			Price,
+			Imgs
 		});
 
 		newCategory = await newCategory.save();

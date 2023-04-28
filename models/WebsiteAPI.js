@@ -14,4 +14,8 @@ const WebsiteAPISchema = new Schema({
     }
 })
 
+WebsiteAPISchema.post("save", function () {
+    return this;
+});
+
 module.exports = mongoose.model("WebsiteAPI", WebsiteAPISchema);

@@ -50,6 +50,9 @@ router.post("/", async (req, res) => {
 				Category.Desc = Desc;
 			}
 
+			if (Category.Price > Price)
+				Category.Price = Price;
+
 			const updatedCategory = await models.Category.findOneAndUpdate(
 				{ _id: Category._id },
 				Category,

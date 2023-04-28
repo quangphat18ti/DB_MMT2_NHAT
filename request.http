@@ -45,10 +45,13 @@ DELETE  http://localhost:5000/api/website/644b319a521f62a7eec4531a
 POST  http://localhost:5000/api/category
 Content-Type: application/json
 
-{
-    "Name" : "Asus TUF Gaming FX506LHB HN188W"
+ {
+    "Name" : "Asus TUF Gaming FX506LHB HN188W - Intel Core I5 10300H | 8GB | .....",
+    "Type":  "Laptop",
+    "Price": 100000,
+    "Imgs": ["http://localhost:5000/api/website/644b319a521f62a7eec4531a"],
+    "Desc": "Màn hình: 15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz, Anti-glare LED-backlit\nCPU: Intel, Core i5, 10300H\nRAM: 8 GB (1 thanh 8 GB), DDR4, 2933 MHz"
 }
-
 ###
 GET http://localhost:5000/api/category
 
@@ -69,9 +72,9 @@ Content-Type: application/json
 {
     "Url": "https://www.thegioididong.com/laptop/asus-tuf-gaming-fx506lhb-i5-hn188w",
     "Name": "Laptop Asus TUF Gaming F15 FX506LHB i5 10300H/8GB/512GB/4GB GTX1650/144Hz/Win11 (HN188W)",
-    "Price": 19990000,
+    "Price": 50000,
     "OriginalPrice": 2099000,
-    "NameCategory": "Laptop Asus TUF Gaming FX506LHB HN188W",
+    "NameCategory": "Laptop Asus TUF Gaming FX506LHB HN188W - Intel Core I5 10300H | 8GB | .....",
     "Imgs": ["https://cdn.tgdd.vn/Products/Images/44/279259/Slider/vi-vn-asus-tuf-gaming-fx506lhb-i5-hn188w-1.jpg","https://cdn.tgdd.vn/Products/Images/44/279259/Slider/vi-vn-asus-tuf-gaming-fx506lhb-i5-hn188w-2.jpg"]
 }
 
@@ -87,7 +90,6 @@ Content-Type: application/json
     "NameCategory": "Laptop Asus TUF Gaming FX506LHB HN188W",
     "Imgs": ["https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/ASUS-TUF-Gaming-F15-2021-black-fpt-3.jpg","https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/ASUS-TUF-Gaming-F15-2021-black-fpt-1.jpg"],
     "Desc": "Màn hình: 15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz, Anti-glare LED-backlit\nCPU: Intel, Core i5, 10300H\nRAM: 8 GB (1 thanh 8 GB), DDR4, 2933 MHz"
-
 }
 
 ###
