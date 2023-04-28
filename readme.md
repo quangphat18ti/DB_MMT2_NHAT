@@ -47,7 +47,7 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
         {
             "Name" : "Asus TUF Gaming FX506LHB HN188W",
             "Type": : "Laptop",
-            "Desc" : "CPU: asdf\nMàn hình: ...\n"
+            "Desc": "Màn hình: 15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz, Anti-glare LED-backlit\nCPU: Intel, Core i5, 10300H\nRAM: 8 GB (1 thanh 8 GB), DDR4, 2933 MHz"
         }
 
 ### Thông số
@@ -74,9 +74,8 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
             "OriginalPrice": 2099000,
             "NameCategory": "Laptop Asus TUF Gaming FX506LHB HN188W",
             "Imgs": ["https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/ASUS-TUF-Gaming-F15-2021-black-fpt-3.jpg","https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/ASUS-TUF-Gaming-F15-2021-black-fpt-1.jpg"],
-            "Desc" : "abc"
-
-}
+            "Desc": "Màn hình: 15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz, Anti-glare LED-backlit\nCPU: Intel, Core i5, 10300H\nRAM: 8 GB (1 thanh 8 GB), DDR4, 2933 MHz"
+        }
 
 ### Thông số
 
@@ -103,10 +102,8 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
 
     1. Type: String, Default = "Laptop"
     2. Name: String, require, unique
-    3. Price: Number
-    4. Imgs: Array[String]
-    5. ProductIDs: --> Không cần truyền
-    6. Desc: String
+    3. ProductIDs: --> Không cần truyền
+    4. Desc: String
 
 ### Product
 
@@ -114,25 +111,6 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
     2. Name: String
     4. Price: Number, require
     5. OriginalPrice: Number
-    6. WebsiteID --> Không cần truyền mà cần tạo Website trước
-    7. CategoryID --> Không cần truyền "nên" tạo Category trước. Nếu không có thì nó sẽ tự tạo.
-
-## Một số phương thức thêm
-
-### DELETE
-
-#### DELETE WEBSITE
-
-    DELETE  https://mmt-main-dbserver.vercel.app/api/website?domain=https://websosanh.vn
-
-Cấu trúc:
-
-- API Link + "?" + domain="linkWebsite"
-
-#### DELETE CATEGORY
-
-    DELETE https://mmt-main-dbserver.vercel.app/api/category/Laptop Asus-TUF-Gaming-FX506LHB-HN188W
-
-Cấu trúc:
-
-- API Link + "/" + CategoryName
+    6. Imgs: Array[String]
+    7. WebsiteID --> Không cần truyền mà cần tạo Website trước
+    8. CategoryID --> Không cần truyền "nên" tạo Category trước. Nếu không có thì nó sẽ tự tạo.
