@@ -102,8 +102,9 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
 
     1. Type: String, Default = "Laptop"
     2. Name: String, require, unique
-    3. ProductIDs: --> Không cần truyền
-    4. Desc: String
+    3. Price: Number
+    4. Imgs: Mảng các String
+    5. Desc: String
 
 ### Product
 
