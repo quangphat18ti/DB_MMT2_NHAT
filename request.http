@@ -52,16 +52,21 @@ Content-Type: application/json
     "Imgs": ["http://localhost:5000/api/website/644b319a521f62a7eec4531a"],
     "Desc": "Màn hình: 15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz, Anti-glare LED-backlit\nCPU: Intel, Core i5, 10300H\nRAM: 8 GB (1 thanh 8 GB), DDR4, 2933 MHz"
 }
+
 ###
 GET http://localhost:5000/api/category
 
 ###
-DELETE http://localhost:5000/api/category/644b322b521f62a7eec45329
-
-
+GET http://localhost:5000/api/category
 
 ###
-GET http://localhost:5000/api/category/644a0a4ecb453db955fb329a
+GET http://localhost:5000/api/category?quantity=2&name=i3
+
+###
+DELETE http://localhost:5000/api/category/644b322b521f62a7eec45329
+
+###
+GET http://localhost:5000/api/category/644b4fc1ae9acac0cfb6edaa
 
 
 // ---------------------------- Product ----------------------

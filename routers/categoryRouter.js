@@ -4,17 +4,36 @@ const models = require("../models");
 const handleResponse = require("../common/response");
 const util = require("../util");
 
-// @ GET api/category?quantity = x
+// @ GET /api/category?quantity = 100&type=laptop&name=Lenovo
 // @Desc: Get x
 // @access: Public
 router.get("/", async (req, res) => {
-	const numProduct = req.query.quantity || process.env.DEFAULT_QUANTITY;
-	console.log(`numProduct = ${numProduct}`);
+	let quantity = req.query.quantity;
+
+	let Type = req.query.type;
+	let TypeCondition = Type ? { $regex: Type, $options: 'i' } : null;
+
+	let Name = req.query.name;
+	let NameCondition = Name ? { $regex: Name, $options: 'i' } : null;
+	// let NameCondition1 = Name ? { $regex: "i5", $options: 'i' } : null;
+
 	try {
+		let condition = {};
+		if (TypeCondition) condition.Type = TypeCondition;
+		if (NameCondition) condition.Name = NameCondition;
+		// if (NameCondition1) condition.Name = NameCondition1;
+
+		let sortCondition = {
+			price: 1
+		}
+
+		let fieldGet = {
+			__v: 0,
+			Desc: 0
+		}
+
 		let JsonDB = await util.exportDBtoJSON(
-			models.Category,
-			{ price: 1 },
-			numProduct
+			models.Category, condition, sortCondition, quantity, fieldGet
 		);
 		res.send(JsonDB);
 	} catch (error) {
@@ -66,11 +85,11 @@ router.get("/:id", async (req, res) => {
 	let id = req.params.id;
 
 	try {
-		let Category = await models.Category.findOne({ _id: id });
+		let Category = await models.Category.findOne({ _id: id }, { __v: 0 });
 		if (!Category) return handleResponse(res, 400, "Category is not existed!");
 		let CategoryID = Category._id;
 
-		let Products = await models.Product.find({ CategoryID });
+		let Products = await models.Product.find({ CategoryID }, {});
 
 		res.send({ Category, Products });
 	} catch (error) {
@@ -97,6 +116,30 @@ router.delete("/:id", async (req, res) => {
 		return handleResponse(res, 500, "Internal server problem!");
 	}
 });
+
+// @ DELETE api/category/all=true
+// @Desc: DELETE the category 
+// @access: Public
+router.delete("/:all", async (req, res) => {
+	let isAll = req.params.all;
+	if (!isAll) return handleResponse(res, 400, "Params all need to be true");
+
+	let isSuccess = await deleteCategory();
+	if (isSuccess) return handleResponse(res, 200, "Delete all Category");
+	else return handleResponse(res, 500);
+})
+
+const deleteCategory = async () => {
+	try {
+		await models.Category.deleteMany({});
+		return true;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+
+	return true;
+}
 
 const createCategory = async (Name, Type, Desc, Price, Imgs) => {
 	try {

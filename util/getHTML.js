@@ -11,7 +11,7 @@ const getHTML = async (url) => {
         let HTML = await page.content();
         browser.close();
 
-        fs.writeFileSync("index.html", HTML);
+        // fs.writeFileSync("index.html", HTML);
         return HTML;
     } catch (error) {
         console.log(error);
