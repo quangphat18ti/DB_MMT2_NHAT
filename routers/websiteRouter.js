@@ -46,9 +46,11 @@ router.post("/", async (req, res) => {
   let newWebsite = {
     Domain,
     Icon,
+    lastModify: Date.now()
   };
 
-  newWebsite = await models.Website.findOneAndUpdate({ Domain }, newWebsite, { new: true, setDefaultsOnInsert: true });
+  newWebsite = await models.Website.findOneAndUpdate({ Domain }, newWebsite, { upsert: true, new: true, setDefaultsOnInsert: true });
+  console.log(newWebsite);
 
   if (!newWebsite) return handleResponse(res, 500);
   else

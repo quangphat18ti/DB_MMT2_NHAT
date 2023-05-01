@@ -56,17 +56,19 @@ router.post("/", async (req, res) => {
 	if (Name.search(Regex) == -1) Name = `${Type} ${Name}`;
 
 	try {
-		let newCategory = new models.Category({
+		let newCategory = {
 			Type,
 			Name,
 			Desc,
 			Price,
 			Imgs
-		});
+		};
 
 		newCategory = await models.Category.findOneAndUpdate({ Name },
-			{ newCategory },
+			newCategory,
 			{ upsert: true, new: true, setDefaultsOnInsert: true });
+
+		console.log(newCategory);
 
 		return handleResponse(
 			res,
@@ -105,21 +107,21 @@ router.get("/:id", async (req, res) => {
 // @ DELETE api/category/Name
 // @Desc: DELETE the category with "Name"
 // @access: Public
-// router.delete("/:id", async (req, res) => {
-// 	let id = req.params.id;
+router.delete("/:id", async (req, res) => {
+	let id = req.params.id;
 
-// 	try {
-// 		let Category = await models.Category.findOneAndDelete({ _id: id });
-// 		if (!Category) {
-// 			return handleResponse(res, 400, "Category is not existed!");
-// 		}
+	try {
+		let Category = await models.Category.findOneAndDelete({ _id: id });
+		if (!Category) {
+			return handleResponse(res, 400, "Category is not existed!");
+		}
 
-// 		return handleResponse(res, 200, "Delete Category Successful", Category);
-// 	} catch (error) {
-// 		console.log(error);
-// 		return handleResponse(res, 500, "Internal server problem!");
-// 	}
-// });
+		return handleResponse(res, 200, "Delete Category Successful", Category);
+	} catch (error) {
+		console.log(error);
+		return handleResponse(res, 500, "Internal server problem!");
+	}
+});
 
 // @ DELETE api/category/all=true
 // @Desc: DELETE the category 
