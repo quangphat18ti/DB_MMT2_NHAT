@@ -4,7 +4,8 @@ POST http://localhost:5000/api/website
 Content-Type: application/json
 
 {
-    "Domain": "https://tiki.vn/"
+    "Domain": "https://phongvu.vn/",
+    "Icon": "https://phongvu.vn/phongvu/favicon-32x32.png"
 }
 
 ###
@@ -34,10 +35,10 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5000/api/website?quantity=10
+GET http://localhost:5000/api/website
 
 ### 
-DELETE  http://localhost:5000/api/website/644b319a521f62a7eec4531a
+GET  http://localhost:5000/api/website/644f95a3949d740316e84291
 
 
 //--------------------- Category --------------------
@@ -57,16 +58,11 @@ Content-Type: application/json
 GET http://localhost:5000/api/category
 
 ###
-GET http://localhost:5000/api/category
+GET http://localhost:5000/api/category/644b58682010ddc504a16648
 
 ###
 GET http://localhost:5000/api/category?quantity=2&name=i3
 
-###
-DELETE http://localhost:5000/api/category/644b322b521f62a7eec45329
-
-###
-GET http://localhost:5000/api/category/644b4fc1ae9acac0cfb6edaa
 
 
 // ---------------------------- Product ----------------------
@@ -100,8 +96,18 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/product?quantity=2
 
+
+###
+GET http://localhost:5000/api/product/644b5fc52010ddc504a16e8e
+
 ###
 GET http://localhost:5000/api/category/644b344f9ed275fa7faec454
 
 ###
 DELETE http://localhost:5000/api/category/644b344f9ed275fa7faec454
+
+------------------------------------------------
+###
+DELETE http://localhost:5000/api/category?all=true
+###
+DELETE http://localhost:5000/api/product?all=true

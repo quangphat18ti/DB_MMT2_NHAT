@@ -13,10 +13,22 @@ router.get("/", async (req, res) => {
   try {
     let JsonDB = await util.exportDBtoJSON(
       models.Website,
+      {},
       { lastModify: -1 },
       numWebsite
     );
     res.send(JsonDB);
+  } catch (error) {
+    console.log(error);
+    return handleResponse(res, 500, "Internal server problem!");
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  let id = req.params.id;
+  try {
+    let website = await models.Website.findOne({ _id: id });
+    res.send(website);
   } catch (error) {
     console.log(error);
     return handleResponse(res, 500, "Internal server problem!");
@@ -31,7 +43,13 @@ router.post("/", async (req, res) => {
 
   if (!Domain) return handleResponse(res, 400, "Domain is required!");
 
-  let newWebsite = await createWebsite(Domain, Icon);
+  let newWebsite = {
+    Domain,
+    Icon,
+  };
+
+  newWebsite = await models.Website.findOneAndUpdate({ Domain }, newWebsite, { new: true, setDefaultsOnInsert: true });
+
   if (!newWebsite) return handleResponse(res, 500);
   else
     return handleResponse(
@@ -45,25 +63,25 @@ router.post("/", async (req, res) => {
 // @ DELETE api/website/id
 // @Desc: DELETE Website by Domain
 // @access: Public
-router.delete("/:id", async (req, res) => {
-  const id = req.params.id;
+// router.delete("/:id", async (req, res) => {
+//   const id = req.params.id;
 
-  try {
-    let deleteWebsite = await models.Website.findOneAndDelete({ _id: id });
-    if (!deleteWebsite)
-      return handleResponse(res, 400, "Website is not existed!");
-    else
-      return handleResponse(
-        res,
-        200,
-        "Delete Website is Succesfully!",
-        deleteWebsite
-      );
-  } catch (error) {
-    console.log(error);
-    return handleResponse(res, 500);
-  }
-});
+//   try {
+//     let deleteWebsite = await models.Website.findOneAndDelete({ _id: id });
+//     if (!deleteWebsite)
+//       return handleResponse(res, 400, "Website is not existed!");
+//     else
+//       return handleResponse(
+//         res,
+//         200,
+//         "Delete Website is Succesfully!",
+//         deleteWebsite
+//       );
+//   } catch (error) {
+//     console.log(error);
+//     return handleResponse(res, 500);
+//   }
+// });
 
 const createWebsite = async (Domain, Icon = null) => {
   if (!Domain) return null;
@@ -97,5 +115,15 @@ const createWebsite = async (Domain, Icon = null) => {
     return null;
   }
 };
+
+const DeleteWebsite = async () => {
+  try {
+    await models.Website.deleteMany({});
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
 
 module.exports = { router, createWebsite };

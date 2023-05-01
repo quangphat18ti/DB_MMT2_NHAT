@@ -83,13 +83,14 @@ router.post("/", async (req, res) => {
 // @Desc: Get ?quantity Product
 // @access: Public
 router.get("/", async (req, res) => {
-	const numProduct = req.query.quantity || process.env.DEFAULT_QUANTITY;
-	console.log(`Number Product = ${numProduct}`);
+	let quantity = req.query.quantity;
+
 	try {
 		let JsonDB = await util.exportDBtoJSON(
 			models.Product,
+			{},
 			{ Price: 1 },
-			numProduct
+			quantity
 		);
 
 		res.send(JsonDB);
@@ -106,7 +107,12 @@ router.get("/:id", async (req, res) => {
 	let id = req.params.id;
 
 	try {
-		let product = models.Product.findOne({ _id: id });
+		let product = await models.Product.findOne({ _id: id })
+			.populate("WebsiteID", ["Domain", "Icon"])
+			.populate("CategoryID", ["Desc"]);
+
+		console.log(product);
+
 		if (!product) return handleResponse(res, 400, "Product is not existed!");
 		res.send(product);
 	} catch (error) {
@@ -115,4 +121,24 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-module.exports = router;
+// router.delete("/", async (req, res) => {
+// 	let isAll = req.query.all;
+// 	if (!isAll) return handleResponse(res, 400, "isAll need to be true");
+
+// 	if (DeleteWebsite()) {
+// 		return handleResponse(res, 200, "Delete all is Successfully");
+// 	}
+// 	else return handleResponse(res, 500);
+// })
+
+async function DeleteWebsite() {
+	try {
+		await models.Product.deleteMany({});
+		return true;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+}
+
+module.exports = { router, DeleteWebsite };

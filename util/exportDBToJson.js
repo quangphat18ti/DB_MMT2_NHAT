@@ -9,7 +9,6 @@ const exportDBtoJSON = async (model, condition, sortCondition, quantity, field) 
         .limit(quantity)
         .sort(sortCondition);
 
-    // data = data.slice(0, quantity);
     let result = JSON.stringify(data);
     return result;
 }
