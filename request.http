@@ -113,4 +113,4 @@ DELETE http://localhost:5000/api/category/644b344f9ed275fa7faec454
 ###
 DELETE http://localhost:5000/api/category?all=true
 ###
-DELETE http://localhost:5000/api/product?all=true
+DELETE https://mmt-main-dbserver.vercel.app/api/product?all=true

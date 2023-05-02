@@ -59,7 +59,7 @@ router.post("/", async (req, res) => {
 		let newCategory = {
 			Type,
 			Name,
-			Desc,
+			Desc: JSON.stringify(Desc),
 			Price,
 			Imgs
 		};
@@ -91,7 +91,7 @@ router.get("/:id", async (req, res) => {
 	try {
 		let Category = await models.Category.findOne({ _id: id }, { __v: 0 });
 		if (!Category) return handleResponse(res, 400, "Category is not existed!");
-		Category.Desc = util.formatToJSON(Category.Desc);
+		// Category.Desc = util.formatToJSON(Category.Desc);
 		console.log(Category.Desc);
 
 		let CategoryID = Category._id;
