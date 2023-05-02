@@ -42,11 +42,16 @@ router.post("/", async (req, res) => {
   let { Domain, Icon } = req.body;
 
   if (!Domain) return handleResponse(res, 400, "Domain is required!");
+  Domain = util.getURLFromDomain(Domain);
+
+  console.log("Domain =", Domain);
+  Icon = Icon ? Icon : await util.getIcon(Domain);
+  Icon = util.getURLFromDomain(Icon, Domain);
+  console.log("Icon = ", Icon);
 
   let newWebsite = {
     Domain,
-    Icon,
-    lastModify: Date.now()
+    Icon
   };
 
   newWebsite = await models.Website.findOneAndUpdate({ Domain }, newWebsite, { upsert: true, new: true, setDefaultsOnInsert: true });
@@ -89,28 +94,19 @@ const createWebsite = async (Domain, Icon = null) => {
   if (!Domain) return null;
   Domain = util.getURLFromDomain(Domain);
 
+  console.log("Domain =", Domain);
+  Icon = Icon ? Icon : await util.getIcon(Domain);
+  Icon = util.getURLFromDomain(Icon, Domain);
+  console.log("Icon = ", Icon);
+
   try {
-    const website = await models.Website.findOneAndDelete({ Domain });
-    if (website) {
-      if (!Icon) Icon = website.Icon;
-      const updateWebsite = new models.Website({
-        Domain,
-        Icon,
-      });
-      await updateWebsite.save();
-      return updateWebsite;
-    }
-
-    console.log("Domain =", Domain);
-    Icon = Icon ? Icon : await util.getIcon(Domain);
-    Icon = util.getURLFromDomain(Icon, Domain);
-    console.log("Icon = ", Icon);
-
-    let newWebsite = new models.Website({
+    let newWebsite = {
       Domain,
-      Icon,
-    });
-    newWebsite = await newWebsite.save();
+      Icon
+    };
+
+    newWebsite = await models.Website.findOneAndUpdate({ Domain }, newWebsite, { upsert: true, new: true, setDefaultsOnInsert: true });
+    console.log(newWebsite);
     return newWebsite;
   } catch (error) {
     console.log(error);

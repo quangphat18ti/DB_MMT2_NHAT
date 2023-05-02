@@ -58,7 +58,7 @@ Content-Type: application/json
 GET http://localhost:5000/api/category
 
 ###
-GET http://localhost:5000/api/category/644fcfd2949d74031602d4fe
+GET http://localhost:5000/api/category/6450787e949d740316500b00
 
 ###
 DELETE http://localhost:5000/api/category/644fd12f949d740316036c21
@@ -101,7 +101,7 @@ GET http://localhost:5000/api/product?quantity=2
 
 
 ###
-GET http://localhost:5000/api/product/644b5fc52010ddc504a16e8e
+GET http://localhost:5000/api/product/64507753ed8ee8d7430af542
 
 ###
 GET http://localhost:5000/api/category/644b344f9ed275fa7faec454

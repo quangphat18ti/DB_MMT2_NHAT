@@ -35,4 +35,10 @@ const ProductSchema = new Schema({
     }
 })
 
+ProductSchema.post("save", function () {
+    // In 'save' middleware, `this` is the document being saved.
+    // console.log('Save', this);
+    return this;
+});
+
 module.exports = mongoose.model("Product", ProductSchema);

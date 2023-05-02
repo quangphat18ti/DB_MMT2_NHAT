@@ -18,9 +18,6 @@ router.post("/", async (req, res) => {
 	if (!NameCategory) return handleResponse(res, 400, "Category is required for Product!");
 
 	try {
-		let product = await models.Product.findOneAndDelete({ Url });
-		if (product) console.log("Delete Product = ", product);
-
 		let domainLink = util.getDomain(Url);
 		let WebsiteID = await models.Website.findOne(
 			{ Domain: domainLink },
@@ -34,7 +31,7 @@ router.post("/", async (req, res) => {
 		if (!Category) Category = await createCategory(NameCategory, Type);
 
 		let CategoryID = Category._id;
-		let newProduct = new models.Product({
+		let newProduct = {
 			Url,
 			Name,
 			Price,
@@ -42,8 +39,8 @@ router.post("/", async (req, res) => {
 			Imgs,
 			WebsiteID,
 			CategoryID,
-		});
-		newProduct = await newProduct.save();
+		};
+		newProduct = await models.Product.findOneAndUpdate({ Url }, newProduct, { upsert: true, new: true, setDefaultsOnInsert: true });
 		console.log(newProduct);
 		try {
 			if (!Category.Desc && Desc) {
