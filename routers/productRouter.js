@@ -118,17 +118,21 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-// router.delete("/", async (req, res) => {
-// 	let isAll = req.query.all;
-// 	if (!isAll) return handleResponse(res, 400, "isAll need to be true");
 
-// 	if (DeleteWebsite()) {
-// 		return handleResponse(res, 200, "Delete all is Successfully");
-// 	}
-// 	else return handleResponse(res, 500);
-// })
+// @ DELETE api/product/all=true
+// @Desc: Get Product by ID
+// @access: Public
+router.delete("/", async (req, res) => {
+	let isAll = req.query.all;
+	if (!isAll) return handleResponse(res, 400, "isAll need to be true");
 
-async function DeleteWebsite() {
+	let isSuccess = await DeleteWebsite();
+	if (isSuccess)
+		return handleResponse(res, 200, "Delete all Product is Successfully");
+	else return handleResponse(res, 500);
+})
+
+async function DeleteProduct() {
 	try {
 		await models.Product.deleteMany({});
 		return true;
@@ -138,4 +142,4 @@ async function DeleteWebsite() {
 	}
 }
 
-module.exports = { router, DeleteWebsite };
+module.exports = { router, DeleteProduct };

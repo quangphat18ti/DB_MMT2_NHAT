@@ -8,8 +8,8 @@ const util = require("../util");
 // @Desc: Get ?quantity Website
 // @access: Public
 router.get("/", async (req, res) => {
-  const numWebsite = req.query.quantity || process.env.DEFAULT_QUANTITY;
-  console.log(`numWebsite = ${numWebsite}`);
+  const numWebsite = req.query.quantity;
+  // console.log(`numWebsite = ${numWebsite}`);
   try {
     let JsonDB = await util.exportDBtoJSON(
       models.Website,
@@ -67,28 +67,41 @@ router.post("/", async (req, res) => {
     );
 });
 
-// @ DELETE api/website/id
+// @DELETE api / website / id
 // @Desc: DELETE Website by Domain
 // @access: Public
-// router.delete("/:id", async (req, res) => {
-//   const id = req.params.id;
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
 
-//   try {
-//     let deleteWebsite = await models.Website.findOneAndDelete({ _id: id });
-//     if (!deleteWebsite)
-//       return handleResponse(res, 400, "Website is not existed!");
-//     else
-//       return handleResponse(
-//         res,
-//         200,
-//         "Delete Website is Succesfully!",
-//         deleteWebsite
-//       );
-//   } catch (error) {
-//     console.log(error);
-//     return handleResponse(res, 500);
-//   }
-// });
+  try {
+    let deleteWebsite = await models.Website.findOneAndDelete({ _id: id });
+    if (!deleteWebsite)
+      return handleResponse(res, 400, "Website is not existed!");
+    else
+      return handleResponse(
+        res,
+        200,
+        "Delete Website is Succesfully!",
+        deleteWebsite
+      );
+  } catch (error) {
+    console.log(error);
+    return handleResponse(res, 500);
+  }
+});
+
+// @DELETE api / website ?all=true
+// @Desc: DELETE all Website
+// @access: Public
+router.delete("/", async (req, res) => {
+  let isAll = req.query.all;
+  if (!isAll) return handlResponse(req, 400);
+
+  let isSuccess = await DeleteWebsite();
+  if (isSuccess) return handleResponse(res, 200, "Delete All Website is Successfully!");
+  else return handleResponse(res, 500);
+})
+
 
 const createWebsite = async (Domain, Icon = null) => {
   if (!Domain) return null;
@@ -124,4 +137,4 @@ const DeleteWebsite = async () => {
   }
 }
 
-module.exports = { router, createWebsite };
+module.exports = { router, createWebsite, DeleteWebsite };

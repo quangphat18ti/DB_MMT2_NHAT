@@ -126,14 +126,14 @@ router.delete("/:id", async (req, res) => {
 // @ DELETE api/category/all=true
 // @Desc: DELETE the category 
 // @access: Public
-// router.delete("/", async (req, res) => {
-// 	let isAll = req.query.all;
-// 	if (!isAll) return handleResponse(res, 400, "Params all need to be true");
+router.delete("/", async (req, res) => {
+	let isAll = req.query.all;
+	if (!isAll) return handleResponse(res, 400);
 
-// 	let isSuccess = await deleteCategory();
-// 	if (isSuccess) return handleResponse(res, 200, "Delete all Category");
-// 	else return handleResponse(res, 500);
-// })
+	let isSuccess = await deleteCategory();
+	if (isSuccess) return handleResponse(res, 200, "Delete all Category");
+	else return handleResponse(res, 500);
+})
 
 const deleteCategory = async () => {
 	try {

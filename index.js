@@ -23,8 +23,6 @@ app.use("/api/website", routers.website);
 app.use("/api/category", routers.category);
 app.use("/api/product", routers.product);
 
-
-
 // var task = cron.schedule('1-59 * * * * *', () => {
 //   console.log('Update DB');
 //   updateDB();
