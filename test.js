@@ -16,12 +16,13 @@ let config = {
     data: data
 };
 
-fetch("https://mmt-main-dbserver.vercel.app/api/category?quantity=10&type=laptop&name=lenovo")
+fetch("https://mmt-main-dbserver.vercel.app/api/category/64508676949d74031655e4f8")
     .then((response) => {
         return response.json();
     })
     .then(data => {
         console.log(data);
+        console.log("Desc = ", data.Category.Desc);
     })
     .catch((error) => {
         console.log(error);

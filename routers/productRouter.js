@@ -126,7 +126,7 @@ router.delete("/", async (req, res) => {
 	let isAll = req.query.all;
 	if (!isAll) return handleResponse(res, 400, "isAll need to be true");
 
-	let isSuccess = await DeleteWebsite();
+	let isSuccess = await DeleteProduct();
 	if (isSuccess)
 		return handleResponse(res, 200, "Delete all Product is Successfully");
 	else return handleResponse(res, 500);

@@ -47,18 +47,35 @@ POST  http://localhost:5000/api/category
 Content-Type: application/json
 
  {
-    "Name" : "Asus TUF Gaming FX506LHB HN188W - Intel Core I5 10300H | 8GB | .....",
-    "Type":  "Laptop",
-    "Price": 1000,
-    "Imgs": ["http://localhost:5000/api/website/644b319a521f62a7eec4531a"],
-    "Desc": "Màn hình: 15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz, Anti-glare LED-backlit\nCPU: Intel, Core i5, 10300H\nRAM: 8 GB (1 thanh 8 GB), DDR4, 2933 MHz"
+    "Type": "Laptop",
+    "Name": "Laptop Acer Swift 3 SF315-52-38YQ -  Intel Core i3-8130U ( 2.2 GHz - 3.4 GHz / 4MB / 2 nhân, 4 luồng ) i3-8130U  |  1 x 4GB  DDR4  2666MHz ( 2 Khe cắm / Hỗ trợ tối đa 16GB ) |  1TB HDD 5400RPM  |  34 x 23 x 1.8 cm ,  1.6 kg",
+    "Price": 13499000,
+    "Imgs": [
+        "https://lh3.googleusercontent.com/3QvwbL5RiUGeN3c_pKSwrhvD1b-AeOK6jw3Zn85CeDSVCFRWxBxd3wKh38RJTShDTkOJNMThb9Rue3UHJrk",
+        "https://lh3.googleusercontent.com/JaKymDrgvBn8nfEDUY-q-sRjnddUiCVV9U-G5MFuxOnLs6akJTcf7jiLWk-SOzXdjxYNhAb3wXWh1f38dsc",
+        "https://lh3.googleusercontent.com/L6DVhOme2PAB2IngHH4tSvLI7VPvTZLGaoUWKJ4547fbL1KrqtgC6gh2HZo0fklxovkmEvrQ0KgiCNHJGAI",
+        "https://lh3.googleusercontent.com/g3pJj0qVuxtuF_5Tc8UWzLwfwXOb00Na7V9YADsqocQa2tAvpIYxSe4Exl8n_4VBQ6X-s9-42Z1WErkkpZhI",
+        "https://lh3.googleusercontent.com/V6YUJKcVOYZOeO-WmtT6KeoLG2vM8l_0trzTq232uOJWiz48K03xHIUXzs9GIm8SR1PfubF2lPSOwaVewUQ",
+        "https://lh3.googleusercontent.com/lqcCkCb_XOjIAAYU9mEquxOpTN37yScVtakALHjIo5WANFqgZS2yJsB004okCaf8XBa6hDWjpc5v3MSkeqxL"
+    ],
+    "ProductID": 1,
+    "Desc": 
+        {
+            "CPU": " Intel Core i3-8130U ( 2.2 GHz - 3.4 GHz / 4MB / 2 nhân, 4 luồng ) i3-8130U ",
+            "OCung": " 1TB HDD 5400RPM ",
+            "RAM": " 1 x 4GB  DDR4  2666MHz ( 2 Khe cắm / Hỗ trợ tối đa 16GB )",
+            "Card": " Onboard  Intel UHD Graphics 620 ",
+            "ManHinh": " 15.6\" ( 1920 x 1080 ) Full HD  IPS  không cảm ứng , HD webcam ",
+            "HDH": " Windows 10 Home SL 64-bit  Windows 10 ",
+            "KT&KL": " 34 x 23 x 1.8 cm ,  1.6 kg"
+        }
 }
 
 ###
 GET http://localhost:5000/api/category
 
 ###
-GET http://localhost:5000/api/category/6450787e949d740316500b00
+GET http://localhost:5000/api/category/6450879b949d7403165664cf
 
 ###
 DELETE http://localhost:5000/api/category/644fd12f949d740316036c21
@@ -93,7 +110,7 @@ Content-Type: application/json
     "OriginalPrice": 2099000,
     "NameCategory": "Laptop Asus TUF Gaming FX506LHB HN188W",
     "Imgs": ["https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/ASUS-TUF-Gaming-F15-2021-black-fpt-3.jpg","https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/ASUS-TUF-Gaming-F15-2021-black-fpt-1.jpg"],
-    "Desc": "Màn hình: 15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz, Anti-glare LED-backlit\nCPU: Intel, Core i5, 10300H\nRAM: 8 GB (1 thanh 8 GB), DDR4, 2933 MHz"
+    "Desc": "{'Màn hình': '15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz, Anti-glare LED-backlit', 'CPU': 'Intel, Core i5, 10300H', 'RAM': '8 GB (1 thanh 8 GB), DDR4, 2933 MHz'}"
 }
 
 ###
@@ -113,4 +130,4 @@ DELETE http://localhost:5000/api/category/644b344f9ed275fa7faec454
 ###
 DELETE http://localhost:5000/api/category?all=true
 ###
-DELETE https://mmt-main-dbserver.vercel.app/api/product?all=true
+DELETE http://localhost:5000/api/product?all=true

@@ -55,11 +55,15 @@ router.post("/", async (req, res) => {
 	const Regex = new RegExp(/${Type}/i);
 	if (Name.search(Regex) == -1) Name = `${Type} ${Name}`;
 
+	Desc = JSON.stringify(Desc);
+
+	console.log("Desc = ", Desc);
+
 	try {
 		let newCategory = {
 			Type,
 			Name,
-			Desc: JSON.stringify(Desc),
+			Desc,
 			Price,
 			Imgs
 		};
