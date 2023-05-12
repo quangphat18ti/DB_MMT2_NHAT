@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
 
   console.log("Domain =", Domain);
   Icon = Icon ? Icon : await util.getIcon(Domain);
-  Icon = util.getURLFromDomain(Icon, Domain);
+  // Icon = util.getURLFromDomain(Icon, Domain);
   console.log("Icon = ", Icon);
 
   let newWebsite = {

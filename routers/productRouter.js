@@ -10,7 +10,7 @@ const createCategory = require("./categoryRouter").createCategory;
 // @Desc: Create and Update product
 // @access: Public
 router.post("/", async (req, res) => {
-	let { Url, Type, Name, Price, OriginalPrice, NameCategory, Imgs, Desc } =
+	let { Url, Type, Name, Price, OriginalPrice, NameCategory, Imgs, Desc, domainLink } =
 		req.body;
 
 	if (!Url) return handleResponse(res, 400, "Url is required for Product!");
@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
 	if (!NameCategory) return handleResponse(res, 400, "Category is required for Product!");
 
 	try {
-		let domainLink = util.getDomain(Url);
+		domainLink = domainLink ? domainLink : util.getDomain(Url);
 		let WebsiteID = await models.Website.findOne(
 			{ Domain: domainLink },
 			{ _id: 1 }

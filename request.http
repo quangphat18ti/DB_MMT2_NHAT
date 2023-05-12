@@ -1,6 +1,16 @@
 // --------------- Website -------------
 
-POST http://localhost:5000/api/website
+POST https://mmt-main-dbserver.vercel.app/api/website
+Content-Type: application/json
+
+{
+    "Domain": "https://tiki.vn/",
+    "Icon": "https://salt.tikicdn.com/cache/w500/ts/seller/ee/fa/a0/98f3f134f85cff2c6972c31777629aa0.png"
+}
+
+###
+
+POST https://mmt-main-dbserver.vercel.app/api/website
 Content-Type: application/json
 
 {
@@ -24,6 +34,15 @@ Content-Type: application/json
 {
     "Domain": "thegioididong.com"
 }
+
+###
+POST http://localhost:5000/api/website
+Content-Type: application/json
+
+{
+    "Domain": "https://khanhhan.vn/"
+}
+
 
 
 ###
@@ -115,9 +134,6 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/product?quantity=2
 
-
-###
-GET http://localhost:5000/api/product/64507753ed8ee8d7430af542
 
 ###
 GET http://localhost:5000/api/category/644b344f9ed275fa7faec454
