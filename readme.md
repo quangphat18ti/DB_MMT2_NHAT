@@ -114,3 +114,19 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
     6. Imgs: Array[String]
     7. WebsiteID --> Không cần truyền mà cần tạo Website trước
     8. CategoryID --> Không cần truyền "nên" tạo Category trước. Nếu không có thì nó sẽ tự tạo.
+
+## [Delete Product](https://mmt-main-dbserver.vercel.app/api/product)
+
+### Request: https://mmt-main-dbserver.vercel.app/api/product_id
+
+### Mẫu request:
+
+DELETE https://mmt-main-dbserver.vercel.app/api/product/644b344f9ed275fa7faec454
+
+## [Delete Category](https://mmt-main-dbserver.vercel.app/api/category)
+
+### Request: https://mmt-main-dbserver.vercel.app/api/category/category_id
+
+### Mẫu request:
+
+DELETE https://mmt-main-dbserver.vercel.app/api/category/644b344f9ed275fa7faec454
