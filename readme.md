@@ -121,7 +121,7 @@ Lưu ý: Cấu trúc lược đồ sẽ được trình bày ở cuối bài
 
 ### Mẫu request:
 
-DELETE https://mmt-main-dbserver.vercel.app/api/product/644b344f9ed275fa7faec454
+`DELETE https://mmt-main-dbserver.vercel.app/api/product/644b344f9ed275fa7faec454`
 
 ## [Delete Category](https://mmt-main-dbserver.vercel.app/api/category)
 
@@ -129,4 +129,4 @@ DELETE https://mmt-main-dbserver.vercel.app/api/product/644b344f9ed275fa7faec454
 
 ### Mẫu request:
 
-DELETE https://mmt-main-dbserver.vercel.app/api/category/644b344f9ed275fa7faec454
+`DELETE https://mmt-main-dbserver.vercel.app/api/category/644b344f9ed275fa7faec454`
