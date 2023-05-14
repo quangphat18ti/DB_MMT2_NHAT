@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  return res.send("Đây là Database Mạng Máy Tính của Phát Cute 123");
+  return res.send("Đây là Database Mạng Máy Tính của Phát Cute 123 cho Nhật ngooooongok");
 });
 
 // routes

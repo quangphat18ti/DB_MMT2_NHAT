@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
     try {
-        const linkDB = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@dbmmt.nnz9bek.mongodb.net/?retryWrites=true&w=majority`;
+        const linkDB = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@nhatdb.nnz9bek.mongodb.net/?retryWrites=true&w=majority`;
         await mongoose.connect(linkDB);
         console.log("MongoDB connected");
     } catch (error) {

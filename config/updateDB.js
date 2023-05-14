@@ -1,5 +1,4 @@
-
-const updateDB = () => {
+function updateDB() {
 
 }
 
