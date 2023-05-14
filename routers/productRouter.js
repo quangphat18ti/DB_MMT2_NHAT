@@ -137,6 +137,27 @@ router.delete("/", async (req, res) => {
 	else return handleResponse(res, 500);
 })
 
+// @ DELETE api/product/id
+// @Desc: Get Product by ID
+// @access: Public
+router.delete("/:id", async (req, res) => {
+	let id = req.params.id;
+
+	try {
+		let product = await models.Product.findOneAndDelete({ _id: id })
+			.populate("WebsiteID", ["Domain", "Icon"])
+			.populate("CategoryID", ["Desc"]);
+
+		console.log("Deleted Product: ", product);
+
+		if (!product) return handleResponse(res, 400, "Product is not existed!");
+		res.send(` Delete Product Successfully:  ${product}`);
+	} catch (error) {
+		console.log(error);
+		return handleResponse(res, 500);
+	}
+})
+
 async function DeleteProduct() {
 	try {
 		await models.Product.deleteMany({});
