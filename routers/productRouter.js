@@ -19,10 +19,15 @@ router.post("/", async (req, res) => {
 
 	try {
 		domainLink = domainLink ? domainLink : util.getDomain(Url);
+		domainLink = util.getURLFromDomain(domainLink);
+		console.log("domainLink = ", domainLink);
+
+
 		let WebsiteID = await models.Website.findOne(
 			{ Domain: domainLink },
 			{ _id: 1 }
 		);
+		console.log("WebsiteID = ", WebsiteID);
 		if (!WebsiteID) WebsiteID = await createWebsite(domainLink)._id;
 
 		let Category = await models.Category.findOne({

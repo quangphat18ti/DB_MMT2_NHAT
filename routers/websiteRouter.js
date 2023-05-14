@@ -119,7 +119,7 @@ const createWebsite = async (Domain, Icon = null) => {
     };
 
     newWebsite = await models.Website.findOneAndUpdate({ Domain }, newWebsite, { upsert: true, new: true, setDefaultsOnInsert: true });
-    console.log(newWebsite);
+    console.log("new Website = ", newWebsite);
     return newWebsite;
   } catch (error) {
     console.log(error);
