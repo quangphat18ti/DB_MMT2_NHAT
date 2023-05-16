@@ -17,6 +17,8 @@ router.post("/", async (req, res) => {
 	if (!Price) return handleResponse(res, 400, "Price is required for Product!");
 	if (!NameCategory) return handleResponse(res, 400, "Category is required for Product!");
 
+	console.log("NameCategory: ", NameCategory);
+
 	try {
 		domainLink = domainLink ? domainLink : util.getDomain(Url);
 		domainLink = util.getURLFromDomain(domainLink);
@@ -33,6 +35,7 @@ router.post("/", async (req, res) => {
 		let Category = await models.Category.findOne({
 			Name: NameCategory,
 		});
+		console.log("CategoryID = ", Category._id);
 		if (!Category) Category = await createCategory(NameCategory, Type);
 
 		let CategoryID = Category._id;
@@ -58,9 +61,7 @@ router.post("/", async (req, res) => {
 			const updatedCategory = await models.Category.findOneAndUpdate(
 				{ _id: Category._id },
 				Category,
-				{
-					new: true,
-				}
+				{ upsert: true, new: true, setDefaultsOnInsert: true }
 			);
 
 			console.log(`updated Category = ${updatedCategory}`);

@@ -58,7 +58,7 @@ Content-Type: application/json
 GET http://localhost:5000/api/category?quantity=100
 
 ### 
-POST  http://localhost:5000/api/product 
+POST  https://db-mmt-2-nhat.vercel.app/api/product
 Content-Type: application/json
 
 {
