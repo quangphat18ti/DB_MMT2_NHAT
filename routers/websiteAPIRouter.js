@@ -34,11 +34,15 @@ router.post("/", async (req, res) => {
     console.log(APILink);
 
     try {
-        let newWebisteAPI = new models.WebAPI({
+        let newWebAPI = {
             APILink
-        }
-        );
-        newWebisteAPI = await newWebisteAPI.save();
+        };
+
+        newWebAPI = await models.WebAPI.findOneAndUpdate({ APILink },
+            newWebAPI,
+            { upsert: true, new: true, setDefaultsOnInsert: true });
+
+        console.log(newWebAPI);
 
         return handleResponse(res, 201, "Create WebsiteAPI successfully", newWebisteAPI);
 

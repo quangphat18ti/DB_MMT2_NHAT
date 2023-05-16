@@ -26,7 +26,7 @@ app.use("/api/websiteAPI", routers.websiteAPI);
 
 var task = cron.schedule('* * * * *', async () => {
   console.log('Update DB');
-  await updateDB();
+  updateDB();
 }, {
   scheduled: false
 });

@@ -84,6 +84,30 @@ Content-Type: application/json
 }
 
 ###
+POST  http://localhost:5000/api/websiteAPI 
+Content-Type: application/json
+
+{
+    "APILink" : "https://bucha-crawler.loca.lt/updateLaptopsFPT"
+}
+
+###
+POST  http://localhost:5000/api/websiteAPI 
+Content-Type: application/json
+
+{
+    "APILink" : "https://bucha-crawler.loca.lt/updateOthersTiki"
+}
+
+###
+POST  http://localhost:5000/api/websiteAPI 
+Content-Type: application/json
+
+{
+    "APILink" : "https://bucha-crawler.loca.lt/updateProductsWSSw"
+}
+
+###
 GET  http://localhost:5000/api/websiteAPI
 ###
 GET  http://localhost:5000/api/category
