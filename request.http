@@ -111,6 +111,18 @@ Content-Type: application/json
 }
 
 ###
+POST  http://localhost:5000/api/websiteAPI 
+Content-Type: application/json
+
+{
+    "APILink" : "https://f520-42-115-115-121.ngrok-free.app/updateDB"
+}
+
+
+###
 GET  http://localhost:5000/api/websiteAPI
 ###
 GET  http://localhost:5000/api/category
+
+###
+GET http://127.0.0.1:4040/api/tunnels
