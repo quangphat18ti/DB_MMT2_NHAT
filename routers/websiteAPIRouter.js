@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
 
         console.log(newWebAPI);
 
-        return handleResponse(res, 201, "Create WebsiteAPI successfully", newWebisteAPI);
+        return handleResponse(res, 201, "Create WebsiteAPI successfully", newWebAPI);
 
     } catch (error) {
         console.log(error);
