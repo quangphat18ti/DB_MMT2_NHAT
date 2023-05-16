@@ -84,4 +84,6 @@ Content-Type: application/json
 }
 
 ###
+GET  http://localhost:5000/api/websiteAPI
+###
 GET  http://localhost:5000/api/category

@@ -24,9 +24,9 @@ app.use("/api/category", routers.category);
 app.use("/api/product", routers.product);
 app.use("/api/websiteAPI", routers.websiteAPI);
 
-var task = cron.schedule('* * * * *', () => {
+var task = cron.schedule('* * * * *', async () => {
   console.log('Update DB');
-  updateDB();
+  await updateDB();
 }, {
   scheduled: false
 });

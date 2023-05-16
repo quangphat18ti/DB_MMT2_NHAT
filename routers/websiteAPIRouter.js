@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     console.log(`numWebsite = ${numWebsite}`);
     try {
         let JsonDB = await util.exportDBtoJSON(
-            models.Website,
+            models.WebAPI,
             {},
             numWebsite
         );
@@ -31,9 +31,12 @@ router.post("/", async (req, res) => {
 
     if (!APILink) return handleResponse(res, 400, "APILink is required!");
 
+    console.log(APILink);
+
     try {
-        let newWebisteAPI = new models.WebAPI(
+        let newWebisteAPI = new models.WebAPI({
             APILink
+        }
         );
         newWebisteAPI = await newWebisteAPI.save();
 
