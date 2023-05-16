@@ -27,15 +27,13 @@ router.get("/", async (req, res) => {
 // @Desc: Create WebsiteAPI
 // @access: Public
 router.post("/", async (req, res) => {
-    let { Domain, APILink } = req.body;
+    let { APILink } = req.body;
 
-    if (!Domain) return handleResponse(res, 400, "Domain is required!");
     if (!APILink) return handleResponse(res, 400, "APILink is required!");
 
     try {
         let newWebisteAPI = new models.WebAPI(
-            Domain,
-            APILink,
+            APILink
         );
         newWebisteAPI = await newWebisteAPI.save();
 
@@ -48,4 +46,4 @@ router.post("/", async (req, res) => {
 
 });
 
-module.exports = { router, createWebsite };
+module.exports = router;

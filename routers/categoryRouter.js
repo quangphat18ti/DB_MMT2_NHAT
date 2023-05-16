@@ -4,7 +4,7 @@ const models = require("../models");
 const handleResponse = require("../common/response");
 const util = require("../util");
 
-// @ GET /api/category?quantity = 100&type=laptop&name=Lenovo
+// @ GET /api/category?quantity = 100&type=laptop&name=Lenovo&sort=false
 // @Desc: Get x
 // @access: Public
 router.get("/", async (req, res) => {
@@ -16,15 +16,15 @@ router.get("/", async (req, res) => {
 	let Name = req.query.name;
 	let NameCondition = Name ? { $regex: Name, $options: 'i' } : null;
 
+	let Sort = req.query.sort;
+	if (Sort == null) Sort = 'false';
+	console.log("Sort =", Sort);
+
 	try {
 		let condition = {};
 		if (TypeCondition) condition.Type = TypeCondition;
 		if (NameCondition) condition.Name = NameCondition;
 		// if (NameCondition1) condition.Name = NameCondition1;
-
-		let sortCondition = {
-			price: 1
-		}
 
 		let field = {
 			__v: 0,
@@ -33,6 +33,11 @@ router.get("/", async (req, res) => {
 
 		let datas = await models.Category.find(condition, field)
 			.limit(quantity);
+
+		// Không sort
+		if (Sort == 'false') {
+			res.send(JSON.stringify(datas));
+		}
 
 		let findProductPromises = datas.map(data => models.Product.find({ CategoryID: data._id }));
 		let productRelevant = await Promise.all(findProductPromises);

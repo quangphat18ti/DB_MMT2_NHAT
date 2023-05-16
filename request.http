@@ -72,3 +72,16 @@ Content-Type: application/json
     "domainLink": "https://fptshop.com.vn/"
 }
 
+###
+DELETE https://db-mmt-2-nhat.vercel.app/api/category/646080248ef3cd4ef814a597
+
+###
+POST  http://localhost:5000/api/websiteAPI 
+Content-Type: application/json
+
+{
+    "APILink" : "https://bucha-crawler.loca.lt/updateDB"
+}
+
+###
+GET  http://localhost:5000/api/category
