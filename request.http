@@ -55,7 +55,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5000/api/website
+GET http://localhost:5000/api/category?quantity=100
 
 ### 
 POST  http://localhost:5000/api/product 
@@ -71,3 +71,4 @@ Content-Type: application/json
     "Desc": {"CPU": "Intel, Core i5, 1135G7", "Hệ điều hành": "Windows 11 Home", "Kích thước": "15.9\tx 322.8 x 212.2 mm", "Màn hình": "14.0 inch, 1920 x 1080 Pixels, IPS, 60 Hz, Acer ComfyView Anti-glare LED-backlit", "Năm ra mắt": "2021", "RAM": "16 GB, LPDDR4X, 4266 MHz", "Trọng lượng": "1.19 kg", "Đồ họa": "Intel Iris Xe Graphics", "Ổ cứng": "SSD 512 GB"}, 
     "domainLink": "https://fptshop.com.vn/"
 }
+

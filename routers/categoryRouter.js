@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
 
 	let Name = req.query.name;
 	let NameCondition = Name ? { $regex: Name, $options: 'i' } : null;
-	// let NameCondition1 = Name ? { $regex: "i5", $options: 'i' } : null;
 
 	try {
 		let condition = {};
@@ -27,14 +26,29 @@ router.get("/", async (req, res) => {
 			price: 1
 		}
 
-		let fieldGet = {
+		let field = {
 			__v: 0,
 			Desc: 0
 		}
 
-		let JsonDB = await util.exportDBtoJSON(
-			models.Category, condition, sortCondition, quantity, fieldGet
-		);
+		let datas = await models.Category.find(condition, field)
+			.limit(quantity);
+
+		let findProductPromises = datas.map(data => models.Product.find({ CategoryID: data._id }));
+		let productRelevant = await Promise.all(findProductPromises);
+
+		datas = datas.map((data, i) => {
+			data = data.toObject();
+			Object.assign(data, { "nProduct": productRelevant[i].length });
+			return data;
+		})
+
+		datas = datas.sort((a, b) => {
+			return b.nProduct - a.nProduct;
+		})
+
+		let JsonDB = JSON.stringify(datas);
+
 		res.send(JsonDB);
 	} catch (error) {
 		console.log(error);
