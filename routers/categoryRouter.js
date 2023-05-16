@@ -37,6 +37,7 @@ router.get("/", async (req, res) => {
 		// Không sort
 		if (Sort == 'false') {
 			res.send(JSON.stringify(datas));
+			return;
 		}
 
 		let findProductPromises = datas.map(data => models.Product.find({ CategoryID: data._id }));

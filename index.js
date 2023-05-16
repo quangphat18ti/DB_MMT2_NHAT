@@ -1,3 +1,4 @@
+// lt --port 5000 --subdomain bucha-db
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
