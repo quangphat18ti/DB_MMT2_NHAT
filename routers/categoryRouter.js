@@ -76,7 +76,6 @@ router.post("/", async (req, res) => {
 	if (Name.search(Regex) == -1) Name = `${Type} ${Name}`;
 
 	Desc = JSON.stringify(Desc);
-
 	console.log("Desc = ", Desc);
 
 	try {

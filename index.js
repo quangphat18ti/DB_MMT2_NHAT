@@ -1,4 +1,4 @@
-// lt --port 5000 --subdomain bucha-db
+// lt --port 5000 --subdomain bucha-db --local-host "127.0.0.1" -o --print-requests
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
@@ -25,14 +25,14 @@ app.use("/api/category", routers.category);
 app.use("/api/product", routers.product);
 app.use("/api/websiteAPI", routers.websiteAPI);
 
-// var task = cron.schedule('* * * * *', async () => {
-//   console.log('Update DB');
-//   updateDB();
-// }, {
-//   scheduled: false
-// });
+var task = cron.schedule('* * * * *', async () => {
+  console.log('Update DB');
+  updateDB();
+}, {
+  scheduled: false
+});
 
-// task.start();
+task.start();
 
 
 const PORT = process.env.PORT || 5000;
