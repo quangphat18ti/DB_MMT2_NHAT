@@ -119,6 +119,7 @@ router.get("/:id", async (req, res) => {
 
 		let CategoryID = Category._id;
 		let Products = await models.Product.find({ CategoryID }, { CategoryID: 0 }).populate("WebsiteID", ["Domain", "Icon"]);
+		Products = Products.sort((a, b) => a.Price - b.Price);
 
 		res.send({ Category, Products });
 	} catch (error) {
