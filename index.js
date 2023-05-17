@@ -5,6 +5,7 @@ const cors = require("cors");
 const connectDB = require("./config/connectDB");
 const updateDB = require("./config/updateDB");
 const routers = require("./routers");
+// const exportDBtoFile = require("./util/exportDBToFile");
 
 const cron = require('node-cron');
 
@@ -25,16 +26,15 @@ app.use("/api/category", routers.category);
 app.use("/api/product", routers.product);
 app.use("/api/websiteAPI", routers.websiteAPI);
 
-// var task = cron.schedule('* * * * *', async () => {
-//   console.log('Update DB');
-//   updateDB();
-// }, {
-//   scheduled: false
-// });
+/// chay vao 00:00 Chủ nhật mỗi tuần
+var task = cron.schedule('0 0 * * 0', async () => {
+  console.log('Update DB');
+  updateDB();
+}, {
+  scheduled: false
+});
 
-// task.start();
-
-// updateDB();
+task.start();
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));

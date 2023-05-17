@@ -79,7 +79,7 @@ Content-Type: application/json
 DELETE https://db-mmt-2-nhat.vercel.app/api/category/646080248ef3cd4ef814a597
 
 ###
-POST  http://localhost:5000/api/websiteAPI 
+POST  https://db-mmt-2-nhat.vercel.app/api/websiteAPI 
 Content-Type: application/json
 
 {
