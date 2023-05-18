@@ -118,11 +118,15 @@ Content-Type: application/json
     "APILink" : "https://f520-42-115-115-121.ngrok-free.app/updateDB"
 }
 
+### 
+POST  http://localhost:5000/api/product/
+Content-Type: application/json
 
-###
-GET  http://localhost:5000/api/websiteAPI
-###
-GET  http://localhost:5000/api/category
-
-###
-GET http://127.0.0.1:4040/api/tunnels
+{
+    "Name": "Laptop Asus Vivobook E1404FA-NK186W R5 7520U/16GB/512GB/14 FHD/Win11", 
+    "NameCategory": "Laptop Asus Vivobook E1404FA-NK186W R5-7520U - AMD, Ryzen 5, 7520U | 16 GB, LPDDR5, 5500 MHz | SSD 512 GB | 32.45 x 21.39 x 1.79 ~ 1.79 cm", 
+    "Type": "Laptop",
+    "Price": 1349000,
+    "Url": "https://fptshop.com.vn/may-tinh-xach-tay/asus-vivobook-e1404fa-nk186w-r5-7520u",
+    "domainLink": "https://fptshop.com.vn/"
+}

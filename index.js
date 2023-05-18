@@ -26,7 +26,7 @@ app.use("/api/category", routers.category);
 app.use("/api/product", routers.product);
 app.use("/api/websiteAPI", routers.websiteAPI);
 
-/// chay vao 00:00 Chủ nhật mỗi tuần
+/ chay vao 00:00 Chủ nhật mỗi tuần
 var task = cron.schedule('0 0 * * 0', async () => {
   console.log('Update DB');
   updateDB();
@@ -35,6 +35,8 @@ var task = cron.schedule('0 0 * * 0', async () => {
 });
 
 task.start();
+
+// updateDB();
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
