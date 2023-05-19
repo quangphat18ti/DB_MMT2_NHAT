@@ -1,4 +1,5 @@
 const models = require("../models");
+const axios = require("axios");
 
 async function crawler() {
     const apiLinks = await models.WebAPI.find({}, { APILink: 1 });
@@ -22,20 +23,30 @@ async function crawler() {
     })
 }
 
-async function updatePrice() {
+async function updateProduct() {
     let categories = await models.Category.find({});
 
     categories.forEach(async (category) => {
+        category = category.toObject();
         let products = await models.Product.find({ CategoryID: category._id }, { Price: 1 });
 
+        if (products.length == 0) {
+            let response = await axios.delete(`https://db-mmt-2-nhat.vercel.app/api/category/${category._id}`);
+            console.log(response);
+        }
+
         try {
+            // update nProduct
+            category.nProduct = products.length;
+
+            // update Price
             let minPrice = products[0].Price;
             for (let i = 0; i < products.length; i++)
                 minPrice = Math.min(minPrice, products[i].Price);
 
             category.Price = minPrice;
             category = await models.Category.findOneAndUpdate({ _id: category._id }, category, { upsert: true, new: true, setDefaultsOnInsert: true })
-            // console.log(category);
+            console.log(category);
         }
         catch (error) {
             console.log("Id Error = ", category._id);
@@ -46,8 +57,8 @@ async function updatePrice() {
 
 async function updateDB() {
     console.log("Start Update Database!!!");
-    crawler();
-    updatePrice();
+    await crawler();
+    updateProduct();
 }
 
 module.exports = updateDB;

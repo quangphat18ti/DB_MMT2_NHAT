@@ -24,6 +24,9 @@ const CategorySchema = new Schema({
     type: String,
     default: "",
   },
+  nProduct: {
+    type: Number
+  }
 });
 
 CategorySchema.pre("save", function () {

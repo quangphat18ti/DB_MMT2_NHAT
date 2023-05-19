@@ -31,27 +31,13 @@ router.get("/", async (req, res) => {
 			Desc: 0
 		}
 
-		let datas = await models.Category.find(condition, field)
-			.limit(quantity);
-
-		// Không sort
-		if (Sort == 'false') {
-			res.send(JSON.stringify(datas));
-			return;
+		let sortCondition = {
+			nProduct: -1
 		}
 
-		let findProductPromises = datas.map(data => models.Product.find({ CategoryID: data._id }));
-		let productRelevant = await Promise.all(findProductPromises);
-
-		datas = datas.map((data, i) => {
-			data = data.toObject();
-			Object.assign(data, { "nProduct": productRelevant[i].length });
-			return data;
-		})
-
-		datas = datas.sort((a, b) => {
-			return b.nProduct - a.nProduct;
-		})
+		let datas = await models.Category.find(condition, field)
+			.limit(quantity)
+			.sort(sortCondition)
 
 		let JsonDB = JSON.stringify(datas);
 
