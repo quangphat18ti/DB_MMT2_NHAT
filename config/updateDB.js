@@ -56,7 +56,6 @@ async function updateProduct() {
 }
 
 async function updateDB() {
-    console.log("Start Update Database!!!");
     await crawler();
     updateProduct();
 }

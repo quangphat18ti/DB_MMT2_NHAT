@@ -119,17 +119,27 @@ Content-Type: application/json
 }
 
 ### 
-POST  http://localhost:5000/api/product/
+POST  http://localhost:5000/api/category/
 Content-Type: application/json
 
 {
-    "Name": "Laptop Asus Vivobook E1404FA-NK186W R5 7520U/16GB/512GB/14 FHD/Win11", 
-    "NameCategory": "Laptop Asus Vivobook E1404FA-NK186W R5-7520U - AMD, Ryzen 5, 7520U | 16 GB, LPDDR5, 5500 MHz | SSD 512 GB | 32.45 x 21.39 x 1.79 ~ 1.79 cm", 
+    "_id": "64607f188ef3cd4ef812a1df",
+    "Name": "Laptop Acer Nitro Gaming AN515-57-5669 i5 11400H - Intel, Core i5, 11400H | 8 GB, DDR4, 3200 MHz | SSD 512 GB | 363.4 x 255 x 23.9 mm",
+    "Desc": { "CPU ": "Intel, Core i5, 11400H ", "Hệ điều hành ": "Windows 11 Home ", "Kích thước ": "363.4 x 255 x 23.9 mm ", "Màn hình ": "15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz, Acer ComfyView LED-backlit ", "Năm ra mắt ": "2021 ", "RAM ": "8 GB, DDR4, 3200 MHz ", "Trọng lượng ": "2.2 kg ", "Xuất xứ ": "Trung Quốc ", "Đồ họa ": "NVIDIA GeForce GTX 1650 4GB; Intel UHD Graphics ", "Ổ cứng ": "SSD 512 GB"},
+    "Imgs": [
+        "https://thanhphatbn.com/wp-content/uploads/2022/06/62693_laptop_acer_gaming_nitro_5_eagle_63.png",
+        "https://thanhphatbn.com/wp-content/uploads/2022/06/62693_laptop_acer_gaming_nitro_5_eagle_60.png",
+        "https://thanhphatbn.com/wp-content/uploads/2022/06/62693_laptop_acer_gaming_nitro_5_eagle_61.png",
+        "https://thanhphatbn.com/wp-content/uploads/2022/06/62693_laptop_acer_gaming_nitro_5_eagle_62.png",
+        "https://thanhphatbn.com/wp-content/uploads/2022/06/62693_laptop_acer_gaming_nitro_5_eagle_63.png"
+    ],
+    "Price": 13000000,
     "Type": "Laptop",
-    "Price": 1349000,
-    "Url": "https://fptshop.com.vn/may-tinh-xach-tay/asus-vivobook-e1404fa-nk186w-r5-7520u",
-    "domainLink": "https://fptshop.com.vn/"
+    "nProduct": 76
 }
 
 ###
 GET http://localhost:5000/api/category?quantity=10&type=laptop
+
+###
+DELETE http://localhost:5000/api/category/6466deb3c60f87f3cc9e92d0

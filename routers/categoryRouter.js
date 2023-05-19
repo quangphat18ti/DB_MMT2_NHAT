@@ -52,7 +52,7 @@ router.get("/", async (req, res) => {
 // @Desc: Create category without product
 // @access: Public
 router.post("/", async (req, res) => {
-	let { Name, Type, Desc, Price, Imgs } = req.body;
+	let { _id, Name, Type, Desc, Price, Imgs } = req.body;
 
 	if (!Name) return handleResponse(res, 400, "Name is required!");
 
@@ -73,7 +73,12 @@ router.post("/", async (req, res) => {
 			Imgs
 		};
 
-		newCategory = await models.Category.findOneAndUpdate({ Name },
+		let condition = {};
+		if (_id) condition = { _id };
+		else condition = { Name };
+
+		console.log(condition);
+		newCategory = await models.Category.findOneAndUpdate(condition,
 			newCategory,
 			{ upsert: true, new: true, setDefaultsOnInsert: true });
 
